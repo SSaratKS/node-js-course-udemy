@@ -1,13 +1,10 @@
-const http = require('http');
 const fs = require('fs');
-const { parse } = require('path');
 
-const server = http.createServer((req, res) => {
-  // console.log(req.url, req.method, req.headers);
+// function requestHandler(req,res) {
+//   console.log(req.url, req.method, req.headers);
+// }
 
-  /* Ending the server using exit() */
-  // process.exit();
-
+const requestHandler = (req, res) => {
   const url = req.url;
   const method = req.method;
   if (url === '/') {
@@ -29,19 +26,19 @@ const server = http.createServer((req, res) => {
       console.log(chunk);
       body.push(chunk);
     });
-    /* ending the event listner */
-    req.on('end', () => {
+    /* ending the event listner to be executed in the future */
+    return req.on('end', () => {
       const parsedBody = Buffer.concat(body).toString();
       console.log(parsedBody);
       /* capturing the input from the buffered parsedBody named "message" */
       const message = parsedBody.split('=')[1];
-      fs.writeFileSync('message.txt', message);
+      fs.writeFile('message.txt', message, (err) => {
+        res.statusCode = 302;
+        /* redirecting back to "/" after writing the file */
+        res.setHeader('Location', '/');
+        return res.end();
+      });
     });
-
-    res.statusCode = 302;
-    /* redirecting back to "/" after writing the file */
-    res.setHeader('Location', '/');
-    return res.end();
   }
   /* Default text */
   res.setHeader('Content-Type', 'text/html');
@@ -50,6 +47,16 @@ const server = http.createServer((req, res) => {
   res.write('<body><h1>Hello from my Node.js Server!</h1></body>');
   res.write('</html>');
   res.end();
-});
+};
 
-server.listen(3000);
+module.exports = {
+  handler: requestHandler,
+  someText: 'Some hard coded text!',
+};
+
+/* Alternative export syntax */
+// module.exports.handler = requestHandler;
+// module.exports = requestHandler;
+
+/* using ONLY exports is specific shortcut for node js */
+// exports.handler = requestHandler;
