@@ -1,12 +1,15 @@
 {
-  "name": "node-starter",
+  "name": "node-basics",
   "version": "0.0.0",
   "description": "Node JS Training Course",
-  "main": "",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": ""
+    "start": "nodemon app.js"
   },
   "author": "Sarat Kumar Sarvepalli",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
