@@ -10,6 +10,9 @@ const path = require('path');
 // Middleware to parse the body data
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//Setting public as static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 // routers are filtered using '/admin'
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
