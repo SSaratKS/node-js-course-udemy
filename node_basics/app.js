@@ -1,13 +1,37 @@
-const http = require('http');
-const routes = require('./routes');
+// const http = require('http');
 
 // const server = http.createServer((req, res) => {
 //   /* Ending the server using exit() */
 //   // process.exit();
 // });
 
-console.log(routes.someText);
+const express = require('express');
+const bodyParser = require('body-parser');
 
-const server = http.createServer(routes.handler);
+const app = express();
 
-server.listen(3000);
+// Middleware to parse the body
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/add-product', (req, res, next) => {
+  console.log('In product middleware');
+  res.send(
+    '<form action="/product" method="POST"><input type="text" name="title"/><button type="submit">Add Product</button></form>'
+  );
+});
+
+app.post('/product', (req, res, next) => {
+  console.log(req.body);
+  res.redirect('/');
+});
+
+//This middleware needs to be placed at the bottom
+app.use('/', (req, res, next) => {
+  console.log('In home middleware');
+  res.send('<h1>Hello From Express</h1>');
+});
+
+app.listen(3000);
+
+// const server = http.createServer(app);
+// server.listen(3000);
