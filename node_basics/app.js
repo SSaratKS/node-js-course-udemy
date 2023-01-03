@@ -3,6 +3,11 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+// Setting the template engine
+app.set('view engine', 'pug');
+// Location of the templates
+app.set('views', 'views');
+
 const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const path = require('path');
