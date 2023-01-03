@@ -16,12 +16,6 @@ router.get('/', (req, res, next) => {
     prods: products,
     pageTitle: 'Shop',
     path: '/',
-
-    // Included for handlebar template
-    hasProducts: products.length > 0,
-    activeShop: true,
-    productCSS: true,
-    // layout: false,
   });
 });
 

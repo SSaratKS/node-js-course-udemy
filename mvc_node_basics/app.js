@@ -1,23 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// const expressHbs = require('express-handlebars');
-
 const app = express();
 
-// // To initialise Express Handlebars engine
-// app.engine(
-//   'hbs',
-//   expressHbs({
-//     layoutsDir: 'views/layouts/',
-//     defaultLayout: 'main-layout',
-//     extname: 'hbs',
-//   })
-// );
-
 // Setting the template engine
-// app.set('view engine', 'hbs');
-// app.set('view engine', 'pug');
 app.set('view engine', 'ejs');
 
 // Location of the templates
