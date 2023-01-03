@@ -7,11 +7,9 @@ const adminData = require('./admin');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  // Absolute path using __dirname
   console.log('shop.js', adminData.products);
-  // res.sendFile(path.join(rootDir, 'views', 'shop.html'));
   const products = adminData.products;
-  // Render the pug template
+  // Render the EJS/PUG template file
   res.render('shop', {
     prods: products,
     pageTitle: 'Shop',
