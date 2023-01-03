@@ -24,7 +24,9 @@ app.use(shopRoutes);
 
 app.use((req, res, next) => {
   // console.log('Error Page Middleware');
-  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+  // res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+  // Rendering the 404 PUG file
+  res.status(404).render('404');
 });
 
 app.listen(3000);
