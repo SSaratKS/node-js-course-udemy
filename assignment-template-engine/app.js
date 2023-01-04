@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const expressHbs = require('express-handlebars');
+const path = require('path');
 
 const app = express();
 const users = [];
@@ -14,7 +15,11 @@ app.set('view engine', 'ejs');
 // app.set('view engine', 'pug');
 app.set('views', 'views');
 
+// Middleware to parse the body data
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//Setting public as static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res, next) => {
   res.render('index', { pageTitle: 'Add User' });
