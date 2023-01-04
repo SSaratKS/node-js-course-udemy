@@ -30,6 +30,7 @@ app.get('/users', (req, res, next) => {
     pageTitle: 'Users',
     users: users,
     hasUsers: users.length > 0,
+    usersCSS: true,
   });
 });
 
