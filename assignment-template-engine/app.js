@@ -9,7 +9,8 @@ app.engine(
   'hbs',
   expressHbs.engine({ defaultLayout: 'main-layout', extname: 'hbs' })
 );
-app.set('view engine', 'hbs');
+app.set('view engine', 'ejs');
+// app.set('view engine', 'hbs');
 // app.set('view engine', 'pug');
 app.set('views', 'views');
 
