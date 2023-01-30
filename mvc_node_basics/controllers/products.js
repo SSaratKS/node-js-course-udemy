@@ -1,4 +1,4 @@
-const products = [];
+const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
   // Rendering the add-product EJS/PUG template file
@@ -15,13 +15,15 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   // console.log(req.body);
-  products.push({ title: req.body.title });
+  const product = new Product(req.body.title);
+  product.save();
   res.redirect('/');
 };
 
 exports.getProducts = (req, res, next) => {
   // console.log('shop.js', adminData.products);
   // Render the EJS/PUG template file
+  const products = Product.fetchAll();
   res.render('shop', {
     prods: products,
     pageTitle: 'Shop',
