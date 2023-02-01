@@ -21,19 +21,11 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  // console.log('shop.js', adminData.products);
-  // Render the EJS/PUG template file
   Product.fetchAll((products) => {
-    res.render('shop/product-list', {
+    res.render('admin/products', {
       prods: products,
-      pageTitle: 'Shop',
-      path: '/',
-
-      // Included for handlebar template
-      hasProducts: products.length > 0,
-      activeShop: true,
-      productCSS: true,
-      // layout: false,
+      pageTitle: 'Admin Products',
+      path: '/admin/products',
     });
   });
 };
